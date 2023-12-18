@@ -46,7 +46,11 @@
                     </td>
                     {%- else -%}
                     <td id="{{j+'T'}}{{currentSauna.starttime+i}}" onclick="changeTimeslot('{{ j }}', '{{ currentSauna.starttime + i}}')">
+                        {%- if tokens > 0 -%}
                         <a href="/booksauna?sauna={{currentSauna.id}}&time={{target_time}}">{{currentSauna['starttime'] + i}} - {{currentSauna['starttime'] + i+1}}</a>
+                        {%- else -%}
+                        {{currentSauna['starttime'] + i}} - {{currentSauna['starttime'] + i+1}}
+                        {%- endif -%}
                     </td>
                     {%- endif -%}
                     {%- endfor -%}

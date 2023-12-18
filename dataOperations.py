@@ -1,3 +1,4 @@
+from datetime import datetime
 from dbconfig import dynamodb
 import uuid
 
@@ -161,3 +162,41 @@ def deleteMultipleReservations(reservations):
         return True
     except:
         return False
+    
+
+def deleteOldReservations():
+    saunas = fetchSaunas()
+    saunaIds = [s.get('id') for s in saunas]
+
+    oldReservs = []
+    # fetch all reservations in one list
+    for s in saunaIds:
+        reservs = fetchOldReservations(s)
+        if len(reservs) > 0:
+            oldReservs.extend(reservs)
+
+    # if old reservations are found, delete them 
+    if len(oldReservs) > 0:
+        deleteMultipleReservations(oldReservs)
+    
+
+# fetch old reservations from sauna
+def fetchOldReservations(saunaId):
+    table = dynamodb.Table('reservation')
+
+    current_time = datetime.utcnow()
+    current_timestamp = current_time.strftime('%Y-%m-%dT%H')
+
+    response = table.query(
+        KeyConditionExpression='saunaid = :saunaid',
+        FilterExpression='#timestamp < :current_timestamp',
+        ExpressionAttributeNames={'#timestamp': 'time'},
+        ExpressionAttributeValues={
+            ':saunaid': int(saunaId),
+            ':current_timestamp': current_timestamp
+        }
+    )
+
+    old_reservations = response['Items']
+
+    return old_reservations

@@ -53,9 +53,6 @@ def home():
     # fetch saunas from db
     saunas = fetchSaunas()
 
-    tokens = fetchUserTokensCount(session['user']['id'])
-    print('tokens', tokens)
-
     # set the dates for calendar
     today = date.today()
     dates = []
@@ -65,12 +62,17 @@ def home():
 
     resDict = {}
 
-    # handle post request
+    # handle changing the sauna selection
     if request.method == 'POST':
         id = int(request.form.get('sauna'))
         currentSauna = getObjectByValue(saunas, id, 'id')
+
+        # save the sauna selection to the session
+        session['sauna'] = currentSauna
         reservations = fetchReservations(id)
         reservs = getObjectsByValue(reservations, id, 'saunaid')
+
+        tokens = fetchUserTokensCount(session['user']['id'])
 
         for obj in reservs:
             time = obj.get('time')
@@ -80,9 +82,15 @@ def home():
         return make_response(render_template('home.html', tokens=tokens, saunas=saunas, currentSauna=currentSauna, dates=dates, reservations=resDict))
 
     # get request
-    currentSauna = saunas[0]
+    if not 'sauna' in session:
+        currentSauna = saunas[0]
+    else:
+        currentSauna = session['sauna']
+    
     reservations = fetchReservations(int(currentSauna.get('id')))
     reservs = getObjectsByValue(reservations, currentSauna.get('id'), 'saunaid')
+
+    tokens = fetchUserTokensCount(session['user']['id'])
 
     for obj in reservs:
         time = obj.get('time')
@@ -172,6 +180,9 @@ def login():
             if hash.hexdigest() == user['password']:
                 session['user'] = user
                 session['user']['id'] = int(session['user']['id'])
+
+                # delete old reservations from system if found
+                deleteOldReservations()
                 return redirect(url_for('home'))
             
         else:

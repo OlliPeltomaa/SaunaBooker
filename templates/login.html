@@ -9,14 +9,34 @@
 <body id="login-page">
     <div id="form-container">
         <h1>SaunaBooker</h1>
+        <p>This is a demo application made with Python and Flask, hosted in the AWS.</p>
+        <div class="btn btn-primary tooltip" id="tooltip-btn" onclick="openTooltip()"> <p id="tooltip-btn-text">Want to try the application?</p>
+            <div class="top" id="tooltip">
+                <p>username: visitor, password: Visitor23</p>
+                <i></i>
+            </div>
+        </div>
         <form action="" method="POST" id="login-form">
-            <p>Login</p>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
+            <div id="input-container">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+            </div>
             <input class="submit" type="submit" value="Login">
         </form>
     </div>
 </body>
+<script>
+    // open tooltip onClick when using a mobile browser
+    const openTooltip = () => {
+        const tooltip = document.getElementById('tooltip');
+        if (tooltip.style.display === 'none') {
+            tooltip.style.display = 'block';
+        }
+        else {
+            tooltip.style.display = 'none';
+        }
+    }
+</script>
 </html>
