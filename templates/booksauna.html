@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="StyleSheet" href="{{ url_for('static',filename='style.css') }}" type="text/css" />
+    <title>Book sauna</title>
+</head>
+<body>
+    {% import 'macros.html' as macros %}
+    {{ macros.navbar(tokens) }}
+    <div class="page-container">
+        <form action="/booksauna" class="booking-form" method="POST">
+            <input type="hidden" value="{{sauna.id}}" name="saunaid">
+            <input type="hidden" value="{{session['user'].id}}" name="userid">
+            <input type="hidden" value="{{time}}" name="time">
+            <h2>Book sauna</h2>
+            <p>Are you sure you want to book the sauna? The booking will cost you one (1) token. Your tokens will reset to 5 in seven days.</p>
+            <div class="confirmation-info">
+                <p>Sauna: <b>{{sauna.name}}</b></p>
+                <p>Time: <b>{{time}}</b></p>
+            </div>
+            <a href="/" class="cancel">Cancel</a>
+            <input class="confirm" type="submit" value="Confirm booking">
+        </form>
+    </div>
+</body>
+</html>

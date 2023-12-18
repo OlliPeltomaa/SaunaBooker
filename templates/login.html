@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="StyleSheet" href="{{ url_for('static',filename='style.css') }}" type="text/css" />
+    <title>Login</title>
+</head>
+<body id="login-page">
+    <div id="form-container">
+        <h1>SaunaBooker</h1>
+        <form action="" method="POST" id="login-form">
+            <p>Login</p>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+            <input class="submit" type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>

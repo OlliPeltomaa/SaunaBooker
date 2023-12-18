@@ -1,0 +1,9 @@
+{# macros.html #}
+{% macro navbar(tokens) %}
+<nav class="navbar">
+    <a href="/" class="logo">SaunaBooker</a>
+    <p>Signed in as {{session['user']['username']}}</p>
+    <p>Tokens: {{tokens}}</p>
+    <a href="{{url_for('logout')}}" id="logout-button">Logout</a>
+</nav>
+{% endmacro %}

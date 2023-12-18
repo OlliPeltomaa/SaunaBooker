@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="StyleSheet" href="{{ url_for('static',filename='style.css') }}" type="text/css" />
+    <title>Home</title>
+</head>
+<body>
+    {% import 'macros.html' as macros %}
+    {{ macros.navbar(tokens) }}
+
+    <div class="page-container">
+        <form class="select-container" method="POST" action="/">
+            <p>Select sauna</p>
+            <select name="sauna" id="sauna-select">
+            {%- for s in saunas -%}
+                {%- if s['id'] == currentSauna['id'] -%}
+                <option value="{{s['id']}}" selected>{{s['name']}}</option>
+                {%- else -%}
+                <option value="{{s['id']}}">{{s['name']}}</option>
+                {%- endif -%}
+            {%- endfor -%}
+            </select>
+            <input type="submit" value="Update table">
+        </form>
+
+        <div id="calendar-container">
+            <table class="week-table">
+                <tr>
+                {%- for d in dates -%}
+                    <th>{{d}}</th>
+                {%- endfor -%}
+                </tr>
+                {%- for i in range(currentSauna['endtime'] - currentSauna['starttime']) -%}
+                <tr>
+                    {%- for j in dates -%}
+                    {%- set target_time = j ~ 'T' ~ (currentSauna.starttime + i) -%}
+                    {%- if target_time in reservations and reservations[target_time]['userid'] == session['user']['id'] -%}
+                    <td id="{{j+'T'}}{{currentSauna.starttime+i}}" class="mysauna" onclick="cancelBooking('{{target_time}}')">
+                        <a href="/cancelsauna?resid={{reservations[target_time]['id']}}&saunaid={{currentSauna.id}}">{{currentSauna['starttime'] + i}} - {{currentSauna['starttime'] + i+1}}</a> Booked
+                    </td>
+                    {%- elif target_time in reservations -%}
+                    <td id="{{j+'T'}}{{currentSauna.starttime+i}}" class="booked">
+                        {{currentSauna['starttime'] + i}} - {{currentSauna['starttime'] + i+1}}
+                    </td>
+                    {%- else -%}
+                    <td id="{{j+'T'}}{{currentSauna.starttime+i}}" onclick="changeTimeslot('{{ j }}', '{{ currentSauna.starttime + i}}')">
+                        <a href="/booksauna?sauna={{currentSauna.id}}&time={{target_time}}">{{currentSauna['starttime'] + i}} - {{currentSauna['starttime'] + i+1}}</a>
+                    </td>
+                    {%- endif -%}
+                    {%- endfor -%}
+                </tr>
+                {%- endfor -%}
+            </table>
+        </div>
+
+        <form action="/booksauna?sauna={{currentSauna.id}}" id="booksauna" class="hidden" method="POST">
+            <input type="hidden" name="timeslot" id="timeslot" value="">
+            <input type="submit" name="book" id="book" value="Book sauna">
+        </form>
+
+        <form action="/cancelsauna?sauna={{currentSauna.id}}" class="hidden" id="cancelsauna" method="POST">
+            <input type="hidden" name="cancelslot" id="cancelslot" value="">
+            <input type="submit" name="cancel" id="cancel" value="Cancel booking">
+        </form>
+
+    </div>
+</body>
+</html>

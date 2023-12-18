@@ -1,0 +1,220 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+}
+
+a {
+    color: #0073cf;
+}
+
+#login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#form-container {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#form-container > * {
+    padding: 20px;
+}
+
+#form-container > h1 {
+    color: #0073cf;
+}
+
+#login-form {
+    width: clamp(200px, 50%, 600px);
+    margin: auto;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: lightgray 5px 5px;
+}
+
+#login-form > * {
+    margin: 5px;
+}
+
+#username, #password {
+    background-color: #ffffff;
+    border: 2px lightgray solid;
+    border-radius: 5px;
+}
+
+.submit, .cancel, .confirm {
+    border: none;
+    padding: 10px;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: medium;
+    text-decoration: none;
+}
+
+.submit {
+    background-color: #0073cf;
+}
+
+.confirm {
+    background-color: #32CD32;
+}
+
+.submit:hover, .cancel:hover, .confirm:hover {
+    cursor: pointer;
+}
+
+.cancel {
+    background-color: #ff8080;
+}
+
+.page-container {
+    padding-top: 10px;
+    width: clamp(250px, 60%, 800px);
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.navbar {
+    background-color: #0073cf;
+    display: inline-block;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar > * {
+    float: left;
+    direction: ltr;
+    margin: 10px;
+    padding: 10px;
+    color: #ffffff;
+
+}
+
+.logo {
+    font-weight: bold;
+    color: black;
+}
+
+#logout-button {
+    float: right;
+    background-color: #ffffff;
+    color: #0073cf;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#sauna-select {
+    background-color: #ffffff;
+    border: 2px lightgray solid;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px;
+}
+
+.select-container {
+    display: grid;
+    grid-template-rows: auto;
+    max-width: 200px;
+    row-gap: 10px;
+}
+
+.select-container > input {
+    background-color: #0073cf;
+    border: none;
+    padding: 5px;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+#calendar-container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.week-table {
+    width: 600px;
+    overflow-x: scroll;
+    background-color: #ffffff;
+    margin: 10px 0px 10px 0px;
+}
+
+.week-table th, .week-table td {
+    padding: 10px;
+}
+
+.week-table th {
+    background-color: lightgray;
+}
+
+table, th, td {
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.week-table td.booked {
+    background-color: #ff8080;
+}
+
+.week-table td.mysauna {
+    background-color: #90EE90;
+}
+
+.week-table td.activeSlot {
+    background-color: #b3ddff !important;
+}
+
+#book, #cancel {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+#book:hover, #cancel:hover {
+    cursor: pointer;
+}
+
+#book {
+    background-color: #0073cf;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.booking-form {
+    margin: auto;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin-top: 100px;
+    width: 50%;
+    min-width: 200px;
+    padding: 40px;
+}
+
+.booking-form > p, .booking-form > h2 {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.confirmation-info {
+    text-align: left;
+    margin: 20px 0px 20px 0px;
+}
