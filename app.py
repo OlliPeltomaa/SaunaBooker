@@ -184,6 +184,8 @@ def login():
                 # delete old reservations from system if found
                 deleteOldReservations()
                 return redirect(url_for('home'))
+            else:
+                error = True
             
         else:
             error = True

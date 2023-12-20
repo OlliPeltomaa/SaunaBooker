@@ -25,6 +25,9 @@
             </div>
             <input class="submit" type="submit" value="Login">
         </form>
+        {%- if error -%}
+        <span class="error">Login failed</span>
+        {%- endif -%}
     </div>
 </body>
 <script>

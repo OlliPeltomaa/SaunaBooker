@@ -77,6 +77,7 @@ input[type=submit]:hover {
 
 .confirm {
     background-color: #32CD32;
+    margin-top: 15px;
 }
 
 .submit:hover, .cancel:hover, .confirm:hover {
@@ -111,7 +112,24 @@ input[type=submit]:hover {
     margin: 10px;
     padding: 10px;
     color: #ffffff;
+}
 
+@media screen and (max-width: 600px) {
+    .navbar {
+        display: grid;
+        grid-template-rows: auto;
+        justify-content:left;
+    }
+
+    .navbar > * {
+        margin: 5px;
+        padding: 5px;
+        color: #ffffff;
+    }
+
+    #logout-button {
+        width: fit-content;
+    }
 }
 
 .logo {
@@ -126,8 +144,14 @@ input[type=submit]:hover {
     color: lightgray;
 }
 
+
+@media screen and (min-width: 600px) {
+    #logout-button {
+        float: right;
+    }
+}
+
 #logout-button {
-    float: right;
     background-color: #ff8080;
     color: #ffffff;
     border-radius: 5px;
@@ -167,7 +191,7 @@ input[type=submit]:hover {
     width: 600px;
     overflow-x: scroll;
     background-color: #ffffff;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 50px 0px;
 }
 
 .week-table th, .week-table td {
@@ -293,4 +317,9 @@ table, th, td {
 #tooltip-btn-text:hover {
     cursor: pointer;
     color: darkblue;
+}
+
+.error {
+    margin: 20px;
+    color: red;
 }
